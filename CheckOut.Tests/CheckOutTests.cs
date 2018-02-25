@@ -63,15 +63,56 @@ namespace CheckOut.Tests
         [TestMethod]
         public void GetTotalPrice_TwoOfDiscountedItemsAndOneNonDiscountedItem_ReturnsDiscountedTotal()
         { 
-            // Arrange 
             _checkOut.Scan("A");
             _checkOut.Scan("B");
             _checkOut.Scan("B");   
-            
-            // Act
+           
             var result = _checkOut.GetTotalPrice();
-            // Assert
+       
             Assert.IsTrue(result == 95);
         }        
+        
+        [TestMethod]
+        public void GetTotalPrice_ThreeOfDiscountedTwoOfDiscountedAndOneNonDiscounted_ReturnsDiscountedTotal()
+        { 
+            _checkOut.Scan("A");
+            _checkOut.Scan("B");
+            _checkOut.Scan("B");   
+            _checkOut.Scan("A");
+            _checkOut.Scan("A");
+            _checkOut.Scan("C");
+             
+            var result = _checkOut.GetTotalPrice();
+            
+            Assert.IsTrue(result == 195);
+        }               
+        
+        [TestMethod]
+        public void GetTotalPrice_TwoPlusOneDiscounted_ReturnsDiscountedTotal()
+        { 
+            _checkOut.Scan("A");
+            _checkOut.Scan("B");
+            _checkOut.Scan("B"); 
+            _checkOut.Scan("B");
+            
+            var result = _checkOut.GetTotalPrice();
+             
+            Assert.IsTrue(result == 125);
+        }          
+        
+        [TestMethod]
+        public void GetTotalPrice_TwoDiscountedTimesTwoAndTwoNotDiscounted_ReturnsDiscountedTotal()
+        { 
+            _checkOut.Scan("A");
+            _checkOut.Scan("B");
+            _checkOut.Scan("A");
+            _checkOut.Scan("B");            
+            _checkOut.Scan("B"); 
+            _checkOut.Scan("B");
+            
+            var result = _checkOut.GetTotalPrice();
+             
+            Assert.IsTrue(result == 190);
+        }      
     }      
 }
