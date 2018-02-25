@@ -37,6 +37,15 @@ namespace CheckOut.Tests
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => _checkOut.Scan("Z"));  
         }        
         
+        [TestMethod]
+        public void GetTotalPrice_OneNotDiscounted_ReturnsNotDiscountedTotal()
+        { 
+            _checkOut.Scan("A");
+
+            var result = _checkOut.GetTotalPrice();
+
+            Assert.IsTrue(result == 50);
+        }    
         
     }      
 }
