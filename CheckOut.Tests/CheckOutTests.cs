@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CheckOut.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,5 +31,14 @@ namespace CheckOut.Tests
 
             Assert.IsTrue(checkOut.TotalItemCount == 1);
         }
+        
+        [TestMethod]
+        public void Scan_WhenInValidSKUPassed_ThrowsArguementOutOfRangeException()
+        {
+            var checkOut = new CheckOut(_items);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => checkOut.Scan("Z"));  
+        }        
+        
+        
     }      
 }
