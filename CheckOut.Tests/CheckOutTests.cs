@@ -22,8 +22,13 @@ namespace CheckOut.Tests
         }
         
         [TestMethod]
-        public void TestMethod1()
+        public void Scan_WhenValidSKUPassed_IncreasesTotalItemCount()
         {
+            var checkOut = new CheckOut(_items);
+            
+            checkOut.Scan("A");
+
+            Assert.IsTrue(checkOut.TotalItemCount == 1);
         }
-    }
+    }      
 }
