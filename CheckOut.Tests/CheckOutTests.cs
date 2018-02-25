@@ -9,7 +9,7 @@ namespace CheckOut.Tests
     public class CheckOutTests
     {
         private List<Item> _items;
-        
+        private CheckOut _checkOut;
         [TestInitialize]
         public void SetUp()
         {
@@ -20,23 +20,21 @@ namespace CheckOut.Tests
                 new Item("C", 20, 0, 0),
                 new Item("D", 15, 0, 0)
             };
+            _checkOut = new CheckOut(_items);  
         }
         
         [TestMethod]
         public void Scan_WhenValidSKUPassed_IncreasesTotalItemCount()
         {
-            var checkOut = new CheckOut(_items);
-            
-            checkOut.Scan("A");
+            _checkOut.Scan("A");
 
-            Assert.IsTrue(checkOut.TotalItemCount == 1);
+            Assert.IsTrue(_checkOut.TotalItemCount == 1);
         }
         
         [TestMethod]
         public void Scan_WhenInValidSKUPassed_ThrowsArguementOutOfRangeException()
         {
-            var checkOut = new CheckOut(_items);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => checkOut.Scan("Z"));  
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => _checkOut.Scan("Z"));  
         }        
         
         
