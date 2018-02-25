@@ -47,5 +47,17 @@ namespace CheckOut.Tests
             Assert.IsTrue(result == 50);
         }    
         
+        [TestMethod]
+        public void GetTotalPrice_OneOfEach_ReturnsNotDiscountedTotal()
+        { 
+            _checkOut.Scan("A");
+            _checkOut.Scan("B");
+            _checkOut.Scan("C");
+            _checkOut.Scan("D");    
+            
+            var result = _checkOut.GetTotalPrice();
+            
+            Assert.IsTrue(result == 115);
+        }
     }      
 }
