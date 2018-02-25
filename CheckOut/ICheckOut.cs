@@ -1,6 +1,6 @@
 ﻿namespace CheckOut
 {
-    public interface ICheckout
+    public interface ICheckOut
     {
         void Scan(string item);
         int GetTotalPrice();
