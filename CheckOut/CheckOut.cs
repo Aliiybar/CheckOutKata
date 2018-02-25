@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CheckOut.Models;
 
 namespace CheckOut
@@ -32,7 +33,16 @@ namespace CheckOut
 
         public int GetTotalPrice()
         {
-            throw new NotImplementedException();
+            var total = 0;
+            foreach (var s in _basket)
+            {
+                var item = _items.FirstOrDefault(k => k.Sku == s);
+                var itemCountInBasket =  _basket.Count(k => k == s);
+               
+                total += itemCountInBasket * item.UnitPrice;  
+            }
+
+            return total;
         }
     }
 
