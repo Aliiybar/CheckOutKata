@@ -34,12 +34,20 @@ namespace CheckOut
         public int GetTotalPrice()
         {
             var total = 0;
-            foreach (var s in _basket)
+            foreach (var s in _basket.Distinct())
             {
                 var item = _items.FirstOrDefault(k => k.Sku == s);
                 var itemCountInBasket =  _basket.Count(k => k == s);
-               
-                total += itemCountInBasket * item.UnitPrice;  
+                if (item.DiscountQuantity > 0 && itemCountInBasket >= item.DiscountQuantity)
+                {
+                    int itemCountToBeDiscounted = itemCountInBasket / item.DiscountQuantity;
+                    int itemCountNotToBeDiscounted = itemCountInBasket % item.DiscountQuantity;
+                    total += (itemCountToBeDiscounted * item.DiscountedTotal) + (itemCountNotToBeDiscounted * item.UnitPrice);
+                } 
+                else
+                {
+                    total += itemCountInBasket * item.UnitPrice;
+                }
             }
 
             return total;
