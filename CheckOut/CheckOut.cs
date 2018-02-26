@@ -9,8 +9,8 @@ namespace CheckOut
     {
         private readonly List<string> _basket = new List<string>();
         private readonly List<Item> _items;
-        public int TotalItemCount = 0;
-        
+        public int TotalItemCount => _basket.Count();
+
         public CheckOut(List<Item> items)
         {
             _items = items;
@@ -21,7 +21,6 @@ namespace CheckOut
             if (_items.Exists(k => k.Sku == item))
             {
               _basket.Add(item);
-              TotalItemCount += 1;
             }
             else
             {
